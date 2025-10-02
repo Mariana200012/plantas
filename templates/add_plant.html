@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="subtitle">Agregar Nueva Planta</h2>
+
+<form method="POST">
+    <div class="field">
+        <label class="label">Nombre</label>
+        <div class="control">
+            <input class="input" type="text" name="name" placeholder="Nombre de la planta" required>
+        </div>
+    </div>
+
+    <div class="field">
+        <label class="label">Frecuencia de Riego</label>
+        <div class="control">
+            <input class="input" type="text" name="watering_frequency" placeholder="Ej: Cada 3 días" required>
+        </div>
+    </div>
+
+    <div class="field">
+        <label class="label">Tipo de Planta</label>
+        <div class="control">
+            <input class="input" type="text" name="plant_type" placeholder="Ej: Suculenta, Cactus, etc." required>
+        </div>
+    </div>
+
+    <div class="field">
+        <div class="control">
+            <button class="button is-primary">Agregar</button>
+        </div>
+    </div>
+</form>
+
+<a href="{{ url_for('index') }}" class="button is-link">Volver</a>
+{% endblock %}

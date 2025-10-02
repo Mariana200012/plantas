@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<a href="{{ url_for('add_plant') }}" class="button is-primary mb-4">Agregar Planta</a>
+
+<table class="table is-fullwidth is-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Frecuencia de Riego</th>
+            <th>Tipo de Planta</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for plant in plants %}
+        <tr>
+            <td>{{ plant[0] }}</td>
+            <td>{{ plant[1] }}</td>
+            <td>{{ plant[2] }}</td>
+            <td>{{ plant[3] }}</td>
+            <td>
+                <a href="{{ url_for('edit_plant', plant_id=plant[0]) }}" class="button is-small is-info">Editar</a>
+                <form action="{{ url_for('delete_plant', plant_id=plant[0]) }}" method="POST" style="display: inline;">
+                    <button class="button is-small is-danger" onclick="return confirm('¿Estás seguro?')">Eliminar</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
