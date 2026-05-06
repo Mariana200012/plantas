@@ -1,0 +1,13 @@
+services:
+  app:
+    image: mariana1203/crud-plantas:latest
+    ports:
+      - "5011:5000"
+    environment:
+      - DATABASE_URL=postgresql://postgres:admin1234@db/cetech
+    networks:
+      - red_swarm_m
+
+networks:
+  red_swarm_m:
+    external: true
