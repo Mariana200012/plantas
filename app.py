@@ -14,6 +14,22 @@ def get_db_connection():
     conn = psycopg2.connect(DATABASE_URL)
     return conn
 
+# Función para crear las tablas si no existen
+def create_tables():
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute('''
+        CREATE TABLE IF NOT EXISTS plants (
+            id SERIAL PRIMARY KEY,
+            name VARCHAR(100) NOT NULL,
+            watering_frequency VARCHAR(100) NOT NULL,
+            plant_type VARCHAR(100) NOT NULL
+        );
+    ''')
+    conn.commit()
+    cur.close()
+    conn.close()
+
 # Ruta principal - Listar todas las plantas
 @app.route('/')
 def index():
@@ -80,4 +96,6 @@ def delete_plant(plant_id):
     return redirect(url_for('index'))
 
 if __name__ == '__main__':
+    # Se ejecuta la creación de tablas antes de iniciar el servidor web
+    create_tables()
     app.run(debug=True)
